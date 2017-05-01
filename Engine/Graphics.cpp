@@ -318,7 +318,7 @@ void Graphics::PutPixel( int x,int y,Color c )
 
 void Graphics::DrawHorizontalLine(int x0, int x1, int y, Color c)
 {
-	for (int x = x0; x < x1; x++)
+	for (int x = x0; x <= x1; x++)
 	{
 		PutPixel(x, y, c);
 	}
@@ -326,7 +326,7 @@ void Graphics::DrawHorizontalLine(int x0, int x1, int y, Color c)
 
 void Graphics::DrawVerticalLine(int y0, int y1, int x, Color c)
 {
-	for (int y = y0; y < y1; y++)
+	for (int y = y0; y <= y1; y++)
 	{
 		PutPixel(x, y, c);
 	}
