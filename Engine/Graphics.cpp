@@ -343,7 +343,14 @@ void Graphics::DrawRect( int x0,int y0,int x1,int y1,Color c )
 	}
 }
 
+void Graphics::DrawRectBorder(int x0, int y0, int x1, int y1, Color c)
+{
+	DrawHorizontalLine(x0, x1, y0, c);
+	DrawHorizontalLine(x0, x1, y1, c);
 
+	DrawVerticalLine(y0, y1, x0, c);
+	DrawVerticalLine(y0, y1, x1, c);
+}
 
 
 //////////////////////////////////////////////////

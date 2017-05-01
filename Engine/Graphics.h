@@ -65,6 +65,11 @@ public:
 	{
 		DrawRect( rect.left,rect.top,rect.right,rect.bottom,c );
 	}
+	void DrawRectBorder(int x0, int y0, int x1, int y1, Color c);
+	void DrawRectBorder(const RectI& rect, Color c)
+	{
+		DrawRectBorder(rect.left, rect.top, rect.right, rect.bottom, c);
+	}
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;
