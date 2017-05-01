@@ -58,6 +58,8 @@ public:
 		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
 	}
 	void PutPixel( int x,int y,Color c );
+	void DrawHorizontalLine(int x0, int x1, int y, Color c);
+	void DrawVerticalLine(int y0, int y1, int x, Color c);
 	void DrawRect( int x0,int y0,int x1,int y1,Color c );
 	void DrawRect( const RectI& rect,Color c )
 	{
