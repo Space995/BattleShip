@@ -31,7 +31,7 @@ private:
 	public:
 		static constexpr int Dimension = 40;
 	private:
-		Vei2 pos; //Board relative position, This is the up-left corner of the tileArea.
+		Vei2 pos; //This is the up-left corner of the tileArea.
 		RectI tileArea;
 		State state = State::Hidden;
 		bool isWater = true;
@@ -43,6 +43,6 @@ private:
 	static constexpr int Height = 10;
 
 	Graphics& gfx;
-	Vei2 pos; //Absolute position. This is the up-left corner of the board.
+	Vei2 pos; //This is the up-left corner of the board.
 	Tile tiles[Width][Height];
 };
