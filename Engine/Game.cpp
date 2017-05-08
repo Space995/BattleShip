@@ -24,13 +24,15 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	playerBoard(Vei2{100,100}, gfx),
+	computerBoard( Vei2{Graphics::ScreenWidth - 500, 100}, gfx)
 {
 }
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
+	gfx.BeginFrame();
 	UpdateModel();
 	ComposeFrame();
 	gfx.EndFrame();
@@ -42,4 +44,6 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	playerBoard.Draw();
+	computerBoard.Draw();
 }
