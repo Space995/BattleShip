@@ -16,14 +16,14 @@ void Board::Tile::Draw(Graphics & gfx) const
 
 void Board::Tile::Reveal()
 {
-	assert(state == State::Hidden);
+	assert(state == State::Hidden); // TODO: Remove this assert.
 	state = State::Revealed;
 }
 
 Board::Board(const Vei2 & in_pos, Graphics & gfx)
 	:
 	gfx(gfx),
-	pos(in_pos)
+	pos(in_pos)		// TODO: Remove this assertions
 {
 	assert( (pos.x >= 0) && (pos.x <= (Graphics::ScreenWidth - (Width * Tile::Dimension))));
 	assert( (pos.y >= 0) && (pos.y <= (Graphics::ScreenHeight - (Height * Tile::Dimension))));
