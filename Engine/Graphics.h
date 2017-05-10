@@ -70,6 +70,7 @@ public:
 	{
 		DrawRectBorder(rect.left, rect.top, rect.right, rect.bottom, c);
 	}
+#include "GraphicsFont.h"
 	~Graphics();
 private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>				pSwapChain;
