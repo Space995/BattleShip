@@ -29,9 +29,9 @@ class Board
 	private:
 		Vei2 pos; //This is the up-left corner of the tileArea.
 		RectI tileArea;
-		State state = State::Hidden;
-		bool isWater = true;
-		Color color = Colors::Gray;
+		State state = State::Revealed; //Player will place his ship tiles, so the board have to start revealed.
+		bool isWater = true; //Player will place his ship tiles, so initially, the tiles have to be water.
+		Color color = Colors::Blue; 
 		static constexpr Color BorderColor = Colors::White;
 	};
 
