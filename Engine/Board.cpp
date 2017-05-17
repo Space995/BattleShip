@@ -35,15 +35,27 @@ bool Board::Tile::Contains(const Vei2 in_pos) const
 	}
 }
 
-bool Board::Tile::isHidden() const
+bool Board::Tile::IsHidden() const
 {
 	return state == State::Hidden;
 }
 
-bool Board::Tile::isRevealed() const
+bool Board::Tile::IsRevealed() const
 {
 	return state == State::Revealed;
 }
+
+bool Board::Tile::IsWater() const
+{
+	return isWater;
+}
+
+bool Board::Tile::IsShipTile() const
+{
+	return !isWater;
+}
+
+
 
 void Board::Tile::Hide()
 {
@@ -103,6 +115,17 @@ void Board::Draw()
 	}
 }
 
+void Board::Reveal()
+{
+	for (int y = 0; y < Height; y++)
+	{
+		for (int x = 0; x < Width; x++)
+		{
+			tiles[x][y].Reveal();
+		}
+	}
+}
+
 bool Board::Contains(const Vei2 & in_pos) const
 {
 	if (in_pos.x > pos.x && in_pos.y > pos.y)
@@ -153,3 +176,15 @@ Board::Tile& Board::getTile(const Vei2 & in_pos)
 		}
 	}
 }
+
+int Board::GetWidth() const
+{
+	return Width;
+}
+
+int Board::GetHeight() const
+{
+	return Height;
+}
+
+

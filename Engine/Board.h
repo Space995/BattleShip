@@ -4,6 +4,7 @@
 
 class Board
 {
+protected:
 	class Tile
 	{
 	public:
@@ -12,8 +13,10 @@ class Board
 
 		void Draw(Graphics& gfx) const;
 		bool Contains(const Vei2 in_pos) const; //This function doesn't evaluate the border of the tile!
-		bool isHidden() const;
-		bool isRevealed() const;
+		bool IsHidden() const;
+		bool IsRevealed() const;
+		bool IsWater() const;
+		bool IsShipTile() const;
 		void Hide();
 		void Reveal();
 		void SetShip(); //If you call this function, you're tile will be a ship tile.
@@ -41,6 +44,7 @@ public:
 	Board(const Vei2& pos, Graphics& gfx);
 
 	void Draw();
+	void Reveal();
 	bool Contains(const Vei2& in_pos) const; //This function doesn't evaluate the border of the board!
 	bool isOnTilesBorder(const Vei2& in_pos) const; //Contains(in_pos) MUST be true to use this function!
 	Tile& getTile(const Vei2& in_pos); //isOnTilesBorder(in_pos) MUST be FALSE to use this function!
@@ -51,5 +55,10 @@ private:
 
 	Graphics& gfx;
 	Vei2 pos; //This is the up-left corner of the board.
+protected:
 	Tile tiles[Width][Height];
+
+protected:
+	int GetWidth() const;
+	int GetHeight() const;
 };

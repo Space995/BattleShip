@@ -28,6 +28,7 @@ Game::Game( MainWindow& wnd )
 	playerBoard(Vei2{100,100}, gfx),
 	computerBoard( Vei2{Graphics::ScreenWidth - 500, 100}, gfx)
 {
+	computerBoard.Reveal();
 }
 
 void Game::Go()
@@ -40,17 +41,23 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (wnd.mouse.IsInWindow() && wnd.mouse.LeftIsPressed())
+	if (!shipsPlaced)
+	{
+		computerBoard.PlaceShips();
+		shipsPlaced = true;
+	}
+
+	/*if (wnd.mouse.IsInWindow() && wnd.mouse.LeftIsPressed())
 	{
 		Vei2 mousePos {wnd.mouse.GetPosX(), wnd.mouse.GetPosY()};
 		if (computerBoard.Contains(mousePos) && !computerBoard.isOnTilesBorder(mousePos))
 		{
-			if (computerBoard.getTile(mousePos).isHidden())
+			if (computerBoard.getTile(mousePos).IsHidden())
 			{
 				computerBoard.getTile(mousePos).Reveal();
 			}
 		}
-	}
+	}*/
 }
 
 void Game::ComposeFrame()

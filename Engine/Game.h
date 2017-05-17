@@ -24,6 +24,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Board.h"
+#include "ComputerBoard.h"
 
 class Game
 {
@@ -44,6 +45,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	Board playerBoard;
-	Board computerBoard;
+	ComputerBoard computerBoard;
+	bool shipsPlaced = false;
 	/********************************/
 };
