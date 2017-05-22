@@ -25,7 +25,7 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	playerBoard(Vei2{100,100}, gfx),
+	playerBoard(Vei2{ 100,100 }, gfx),
 	computerBoard( Vei2{Graphics::ScreenWidth - 500, 100}, gfx)
 {
 	computerBoard.Reveal();

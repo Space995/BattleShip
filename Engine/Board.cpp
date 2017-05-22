@@ -94,10 +94,9 @@ Board::Board(const Vei2 & in_pos, Graphics & gfx)
 	numbers(gfx),	
 	number10(gfx) // TODO: Remove this assertions
 {
-	assert( (pos.x >= 0) && (pos.x <= (Graphics::ScreenWidth - (Width * Tile::Dimension))));
-	assert( (pos.y >= 0) && (pos.y <= (Graphics::ScreenHeight - (Height * Tile::Dimension))));
+	assert( (pos.x >= Tile::Dimension + 15) && (pos.x <= (Graphics::ScreenWidth - (Width * Tile::Dimension))));
+	assert( (pos.y >= Tile::Dimension) && (pos.y <= (Graphics::ScreenHeight - (Height * Tile::Dimension))));
 
-	//TODO: Add assertions for texts!!!
 	letters.SetPostion(pos.x + 8, pos.y - Tile::Dimension);
 	letters.SetColor(lettersColor);
 	letters.SetText("A B C D E F G H I J");
