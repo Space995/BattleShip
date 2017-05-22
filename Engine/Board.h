@@ -1,6 +1,7 @@
 #pragma once
 #include "Colors.h"
 #include "Graphics.h"
+#include "Text.h"
 
 class Board
 {
@@ -53,8 +54,14 @@ private:
 	static constexpr int Width = 10;
 	static constexpr int Height = 10;
 
+	static constexpr Color lettersColor = Colors::Yellow;
+	static constexpr Color numbersColor = Colors::Green;
+
 	Graphics& gfx;
 	Vei2 pos; //This is the up-left corner of the board.
+	Text letters;
+	Text numbers;
+	Text number10;
 protected:
 	Tile tiles[Width][Height];
 

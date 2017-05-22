@@ -89,10 +89,31 @@ void Board::Tile::SetShip()
 Board::Board(const Vei2 & in_pos, Graphics & gfx)
 	:
 	gfx(gfx),
-	pos(in_pos)		// TODO: Remove this assertions
+	pos(in_pos),		
+	letters(gfx),
+	numbers(gfx),	
+	number10(gfx) // TODO: Remove this assertions
 {
 	assert( (pos.x >= 0) && (pos.x <= (Graphics::ScreenWidth - (Width * Tile::Dimension))));
 	assert( (pos.y >= 0) && (pos.y <= (Graphics::ScreenHeight - (Height * Tile::Dimension))));
+
+	//TODO: Add assertions for texts!!!
+	letters.SetPostion(pos.x + 8, pos.y - Tile::Dimension);
+	letters.SetColor(lettersColor);
+	letters.SetText("A B C D E F G H I J");
+	letters.SetSpacing(-5);
+
+	numbers.SetPostion(pos.x - Tile::Dimension, pos.y + 4);
+	numbers.SetColor(numbersColor);
+	numbers.SetText("1\n2\n3\n4\n5\n6\n7\n8\n9");
+	numbers.SetLineSpacing(10);
+	numbers.SetSpacing(0);
+
+	number10.SetPostion(pos.x - Tile::Dimension - 20, pos.y + 4 + (9 * Tile::Dimension));
+	number10.SetColor(numbersColor);
+	number10.SetText("10");
+	number10.SetLineSpacing(10);
+	number10.SetSpacing(0);
 
 	for (int y = 0; y < Height; y++)
 	{
@@ -113,6 +134,10 @@ void Board::Draw()
 			tiles[x][y].Draw(gfx);
 		}
 	}
+
+	letters.Draw();
+	numbers.Draw();
+	number10.Draw();
 }
 
 void Board::Reveal()
