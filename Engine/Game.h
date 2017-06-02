@@ -37,7 +37,50 @@ private:
 	void ComposeFrame();
 	void UpdateModel();
 	/********************************/
-	/*  User Functions              */
+	/*  User Types and Functions    */
+	enum class Stage
+	{
+		WAITING,
+		STARTING,
+		PLAYING,
+		ENDING,
+		OVER
+	};
+
+	class Turn
+	{
+	public:
+		enum class PlayingEntity
+		{
+			Player,
+			Computer
+		};
+
+		Turn();
+
+		void Next();
+		void MoveCompleted();
+		const PlayingEntity& GetPlayingEntity() const;
+		bool IsMoveDone() const;
+	private:
+		
+	private:
+		PlayingEntity entity;
+		bool isMoveDone = false;
+	};
+	/*enum class Turn
+	{
+		Player,
+		Computer
+	};*/
+
+	enum class Winner
+	{
+		Player,
+		Computer
+	};
+
+
 	/********************************/
 private:
 	MainWindow& wnd;
@@ -46,6 +89,11 @@ private:
 	/*  User Variables              */
 	Board playerBoard;
 	ComputerBoard computerBoard;
-	bool shipsPlaced = false;
+
+	Text testText;
+
+	Stage stage = Stage::WAITING;
+	Turn turn;
+	Winner winner;
 	/********************************/
 };

@@ -45,7 +45,7 @@ void ComputerBoard::PlaceShip(short nShipTiles)
 
 	std::random_device rd;
 	std::mt19937 rng( rd() );
-	std::uniform_int_distribution<int> dirDist(1, 2); //1: horizontal, 2: vertical.
+	std::uniform_int_distribution<unsigned short> dirDist(1, 2); //1: horizontal, 2: vertical.
 	
 	std::uniform_int_distribution<unsigned short> xDist1(0, GetWidth() - nShipTiles);
 	std::uniform_int_distribution<unsigned short> yDist1(0, GetHeight() - 1);

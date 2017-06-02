@@ -47,8 +47,8 @@ public:
 	void Draw();
 	void Reveal();
 	bool Contains(const Vei2& in_pos) const; //This function doesn't evaluate the border of the board!
-	bool isOnTilesBorder(const Vei2& in_pos) const; //Contains(in_pos) MUST be true to use this function!
-	Tile& getTile(const Vei2& in_pos); //isOnTilesBorder(in_pos) MUST be FALSE to use this function!
+	bool IsOnTilesBorder(const Vei2& in_pos) const; //Contains(in_pos) MUST be true to use this function!
+	Tile& GetTile(const Vei2& in_pos); //IsOnTilesBorder(in_pos) MUST be FALSE to use this function!
 
 private:
 	static constexpr int Width = 10;

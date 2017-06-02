@@ -81,7 +81,7 @@ void Board::Tile::Reveal()
 
 void Board::Tile::SetShip()
 {
-	assert(state == State::Revealed && isWater); // TODO: Remove this assert.
+	assert(/*state == State::Revealed &&*/ isWater); // TODO: Remove this assert.
 	isWater = false;
 	color = Colors::Gray;
 }
@@ -171,7 +171,7 @@ bool Board::Contains(const Vei2 & in_pos) const
 	}
 }
 
-bool Board::isOnTilesBorder(const Vei2 & in_pos) const
+bool Board::IsOnTilesBorder(const Vei2 & in_pos) const
 {
 	if ((in_pos.x - pos.x) % Tile::Dimension == 0.0)
 	{
@@ -187,7 +187,7 @@ bool Board::isOnTilesBorder(const Vei2 & in_pos) const
 	}
 }
 
-Board::Tile& Board::getTile(const Vei2 & in_pos)
+Board::Tile& Board::GetTile(const Vei2 & in_pos)
 {
 	for (int y = 0; y < Height; y++)
 	{

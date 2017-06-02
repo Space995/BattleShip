@@ -20,15 +20,30 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include <random>
+#include <assert.h>
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd ),
+	wnd(wnd),
+	gfx(wnd),
 	playerBoard(Vei2{ 100,100 }, gfx),
-	computerBoard( Vei2{Graphics::ScreenWidth - 500, 100}, gfx)
+	computerBoard(Vei2{ Graphics::ScreenWidth - 500, 100 }, gfx),
+	testText(gfx)
 {
-	computerBoard.Reveal();
+	computerBoard.PlaceShips();
+
+	testText.SetPostion(220, Graphics::ScreenHeight - 120);
+	testText.SetColor(Colors::White);
+
+	if (turn.GetPlayingEntity() == Turn::PlayingEntity::Player)
+	{
+		testText.SetText("Inizia a giocare il Giocatore!");
+	}
+	else
+	{
+		testText.SetText("Inizia a giocare il Computer!");
+	}
 }
 
 void Game::Go()
@@ -41,27 +56,85 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (!shipsPlaced)
+	if (wnd.kbd.KeyIsPressed(VK_RETURN))
 	{
-		computerBoard.PlaceShips();
-		shipsPlaced = true;
+		turn.MoveCompleted();
+		turn.Next();
+
+		if (turn.GetPlayingEntity() == Turn::PlayingEntity::Player)
+		{
+			testText.SetText("Turno del Giocatore!");
+		}
+		else
+		{
+			testText.SetText("Turno del Computer!");
+		}
 	}
 
-	/*if (wnd.mouse.IsInWindow() && wnd.mouse.LeftIsPressed())
+	if (turn.GetPlayingEntity() == Turn::PlayingEntity::Player && wnd.mouse.IsInWindow() && wnd.mouse.LeftIsPressed())
 	{
 		Vei2 mousePos {wnd.mouse.GetPosX(), wnd.mouse.GetPosY()};
-		if (computerBoard.Contains(mousePos) && !computerBoard.isOnTilesBorder(mousePos))
+		if (computerBoard.Contains(mousePos) && !computerBoard.IsOnTilesBorder(mousePos))
 		{
-			if (computerBoard.getTile(mousePos).IsHidden())
+			if (computerBoard.GetTile(mousePos).IsHidden())
 			{
-				computerBoard.getTile(mousePos).Reveal();
+				computerBoard.GetTile(mousePos).Reveal();
+				if (computerBoard.GetTile(mousePos).IsWater())
+				{
+					turn.MoveCompleted();
+					turn.Next();
+					testText.SetText("Turno del Computer!");
+				}
 			}
 		}
-	}*/
+	}
 }
 
 void Game::ComposeFrame()
 {
 	playerBoard.Draw();
 	computerBoard.Draw();
+
+	testText.Draw();
+}
+
+Game::Turn::Turn()
+{
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_int_distribution<int> startEntDistr(0, 1);
+
+	entity = (PlayingEntity) startEntDistr(rng);
+}
+
+void Game::Turn::Next()
+{
+	assert(isMoveDone); // TODO: Remove this assertion!
+
+	if (entity == PlayingEntity::Computer)
+	{
+		entity = PlayingEntity::Player;
+	}
+	else
+	{
+		entity = PlayingEntity::Computer;
+	}
+
+	isMoveDone = false;
+}
+
+void Game::Turn::MoveCompleted()
+{
+	assert(!isMoveDone); // TODO: Remove this assertion!
+	isMoveDone = true;
+}
+
+const Game::Turn::PlayingEntity& Game::Turn::GetPlayingEntity() const
+{
+	return entity;
+}
+
+bool Game::Turn::IsMoveDone() const
+{
+	return isMoveDone;
 }
