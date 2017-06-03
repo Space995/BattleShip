@@ -20,7 +20,7 @@ protected:
 		bool IsShipTile() const;
 		void Hide();
 		void Reveal();
-		void SetShip(); //If you call this function, you're tile will be a ship tile.
+		void SetShip(); //If you call this function, your tile becomes a ship tile.
 	private:
 		enum class State
 		{
@@ -33,9 +33,9 @@ protected:
 	private:
 		Vei2 pos; //This is the up-left corner of the tileArea.
 		RectI tileArea;
-		State state = State::Revealed; //Player will place his ship tiles, so the board have to start revealed.
+		State state = State::Hidden; //Player will not place his ship tiles, so tiles have to start hidden.
 		bool isWater = true; //Player will place his ship tiles, so initially, the tiles have to be water.
-		Color color = Colors::Blue; 
+		Color color = Colors::Gray;
 		static constexpr Color BorderColor = Colors::White;
 	};
 

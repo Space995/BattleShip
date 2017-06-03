@@ -20,8 +20,8 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
-#include <random>
-#include <assert.h>
+#include <chrono>
+#include <thread>
 
 Game::Game(MainWindow& wnd)
 	:
@@ -69,6 +69,9 @@ void Game::UpdateModel()
 		{
 			testText.SetText("Turno del Computer!");
 		}
+
+		using namespace std::chrono_literals;
+		std::this_thread::sleep_for(0.5s);
 	}
 
 	if (turn.GetPlayingEntity() == Turn::PlayingEntity::Player && wnd.mouse.IsInWindow() && wnd.mouse.LeftIsPressed())
@@ -96,45 +99,4 @@ void Game::ComposeFrame()
 	computerBoard.Draw();
 
 	testText.Draw();
-}
-
-Game::Turn::Turn()
-{
-	std::random_device rd;
-	std::mt19937 rng(rd());
-	std::uniform_int_distribution<int> startEntDistr(0, 1);
-
-	entity = (PlayingEntity) startEntDistr(rng);
-}
-
-void Game::Turn::Next()
-{
-	assert(isMoveDone); // TODO: Remove this assertion!
-
-	if (entity == PlayingEntity::Computer)
-	{
-		entity = PlayingEntity::Player;
-	}
-	else
-	{
-		entity = PlayingEntity::Computer;
-	}
-
-	isMoveDone = false;
-}
-
-void Game::Turn::MoveCompleted()
-{
-	assert(!isMoveDone); // TODO: Remove this assertion!
-	isMoveDone = true;
-}
-
-const Game::Turn::PlayingEntity& Game::Turn::GetPlayingEntity() const
-{
-	return entity;
-}
-
-bool Game::Turn::IsMoveDone() const
-{
-	return isMoveDone;
 }

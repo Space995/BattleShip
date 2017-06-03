@@ -6,13 +6,6 @@ ComputerBoard::ComputerBoard(const Vei2 & pos, Graphics & gfx)
 	:
 	Board(pos, gfx)
 {
-	for (int y = 0; y < GetHeight(); y++)
-	{
-		for (int x = 0; x < GetWidth(); x++)
-		{
-			tiles[x][y].Hide();
-		}
-	}
 }
 
 void ComputerBoard::PlaceShips()
